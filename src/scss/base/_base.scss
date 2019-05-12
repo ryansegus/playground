@@ -1,0 +1,188 @@
+  html {
+      box-sizing: border-box;
+      font-family: $bodyFont;
+      font-size: 100%;
+      -webkit-text-size-adjust: 100%;
+      /* Font variant */
+      font-variant-ligatures: none;
+      -webkit-font-variant-ligatures: none;
+      /* Smoothing */
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+  }
+
+  // ==============================
+  // Usage
+  // ==============================
+
+  // simple (no scale)
+  // p { @include font-size(15px); }
+
+  :root {
+      //  fluid scale based on default bounding
+      @include font-size(16px, 24px, 320px, 960px);
+      --gallery-height: 230px;
+
+      @include breakpoint('phone') {
+          --gallery-height: 200px;
+      }
+
+      @include breakpoint('desktop') {
+          --gallery-height: 350px;
+      }
+  }
+
+  ///  fluid scale based on custom bounding
+  ///  (you could also change defaults)
+  /// :root { @include font-size(16px, 24px, 320px, 960px); }
+  h1,
+  h2,
+  h3 {
+      font-family: $titlesFont;
+      font-weight: 700;
+  }
+
+  // h1 {@include font-size(20px, 40px)}
+  $baseFontSize:1.6em;
+
+  @for $i from 1 through 4 {
+      h#{$i} {
+          @include font-size(($baseFontSize - 0.4), ($baseFontSize));
+      }
+
+      $baseFontSize:($baseFontSize - 0.1);
+  }
+
+  p {
+      @include font-size(14px, 22px);
+  }
+
+  /* recommended css code for vue-svgicon */
+  .svg {
+      &-icon {
+          display: inline-block;
+          color: inherit;
+          vertical-align: middle;
+          fill: none;
+          stroke: currentColor;
+      }
+
+      &-fill {
+          fill: currentColor;
+          stroke: none;
+      }
+  }
+
+  .l-menuBox {
+      background-color: whitesmoke;
+      transition: background-color 300ms ease;
+  }
+
+  .no-cssgrid {
+      .l-pageBox {
+          margin: 0 auto;
+
+          &--infographics,
+          &--contact,
+          &--project-details {
+              display: inline-block;
+              width: 100%;
+          }
+      }
+
+      #portfolio {
+          max-width: 60%;
+          margin: 0 auto;
+      }
+  }
+
+  // CSS Grid
+  @supports (display: grid) {
+      .l-mainGrid {
+          display: grid;
+          grid-template-areas: "menu page""menu footer";
+          grid-template-columns: 50px auto;
+          grid-template-rows: 1fr;
+          max-width: 100%;
+
+          @include breakpoint('tablet') {
+              grid-template-columns: 30% auto;
+          }
+
+          @include breakpoint('desktop') {
+              grid-template-columns: 20% auto;
+          }
+      }
+
+      .l-menuBox {
+          grid-area: menu;
+          box-sizing: border-box;
+          position: sticky;
+          top: 0;
+          height: 100vh;
+      }
+
+      .l-pageBox {
+          grid-area: page;
+      }
+
+      .pageFooter {
+          grid-area: footer;
+      }
+  }
+
+  .l-pageBox {
+      background-color: $secondaryColor;
+
+      &--infographics {
+          background: #eee url(https://www.toptal.com/designers/subtlepatterns/patterns/gplaypattern.png) center center;
+      }
+
+      &--projects,
+      &--contact,
+      &--project-details {
+          background: #eee url(https://www.toptal.com/designers/subtlepatterns/patterns/argyle.png) center center;
+      }
+  }
+
+
+  // Animations
+  .fade {
+
+      &-enter-active,
+      &-leave-active {
+          transition: opacity 0.3s, transform 0.3s;
+      }
+  }
+
+  .fade-enter,
+  .fade-leave-to
+
+  /* .slide-fade-leave-active below version 2.1.8 */
+      {
+      transform: translateX(-100%);
+      opacity: 0;
+  }
+
+  /* Enter and leave animations can use different */
+  /* durations and timing functions.              */
+  .slide-fade {
+
+      &-enter-active,
+      &-leave-active {
+          transition: opacity 0.3s, transform 0.3s;
+      }
+  }
+
+  .slide-fade-enter,
+  .slide-fade-leave-to
+
+  /* .slide-fade-leave-active below version 2.1.8 */
+      {
+      transform: translateX(100%);
+      opacity: 1;
+  }

@@ -1,0 +1,78 @@
+$primaryColor:#ff00ff;
+$secondaryColor:#1d1d1d;
+$max-width:30rem;
+$buttonSize:20px;
+$pad:1em;
+$bp:20px;
+$headerHeight:60px;
+$heroPaddingTop: 40px;
+$gridGap:10px;
+$squishPadding:0 10px;
+
+/// Regular font family
+/// @type List
+$titlesFont:'Nanum Gothic', sans-serif;
+
+/// Code (monospace) font family
+/// @type List
+$bodyFont:'Nanum Gothic', sans-serif;
+
+$palettes:(
+  lighttest: #eee,
+  secondary: $secondaryColor,
+  primary:
+  (
+    base: $primaryColor,
+    light: lighten($primaryColor, 10%),
+    dark: darken($primaryColor, 10%),
+    trans: transparentize($primaryColor, 0.1)
+  ),
+  contextual:
+  (
+    success: #77b300,
+    info: #00c5ff,
+    warning: #fcae00,
+    danger: #e60700
+  ),
+  blue: (SummerSky: #27aae1),
+  brand:
+  (
+    Mac: #a2a2a2,
+    Windows: #b4009e,
+    Brackets: #28aae1,
+    PhotoShop: #00a4e4,
+    Illustrator: #ff8018,
+    HTML: #F16529,
+    Sass:#c69,
+    CSS: #005387,
+    PHP: #6481B9,
+    JQuery: #0769AD,
+    InDesign: #ff4289,
+    PostgreSQL: #008BB9,
+    MySQL: #00759f,
+    JavaScript: #E9B231,
+    swatch-github-blue: #4078c0,
+    swatch-github-green: #6cc644,
+    swatch-github-red :#bd2c00,
+    swatch-github-orange: #c9510c,
+    swatch-github-purple :#6e5494,
+    swatch-github-gray-dark: #24292e,
+    pirelliYellow: #f8cc1b,
+    magma: #EE8E1D,
+    milano: #86878B,
+    vinylcosas: #DA0885,
+    greymy: #00E9E6,
+    viniles: purple,
+    branding:#32A041
+  ),
+  social:
+  (
+    facebook: #3b5998,
+    twitter: #3cf,
+    linkedin: #0077b5,
+    instagram: #c13584,
+    googleplus: #dd4b39,
+    behance: #1769ff,
+    codepen: #0ebeff
+  )
+);

@@ -1,0 +1,139 @@
+// Carousel
+$dotsSize:10px;
+.c-carousel {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 400px;
+  background-color: black;
+  overflow: hidden;
+  @include breakpoint("desktop") {
+    height: 700px;
+  }
+
+  &__item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    transition: transform 1s;
+    &--2 {
+      transform: translateX(-100%)
+    }
+    &--3 {
+      transform: translateX(-200%)
+    }
+  }
+
+  &__text {
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    left: 10%;
+    transform: translate(0, -50%);
+    color: white;
+    text-align: left;
+    @include breakpoint("tablet-wide") {
+      width: 30%;
+    }
+  }
+
+  &__title {
+    @include font-size(18px, 52px);
+  }
+
+  &__paragraph {
+    @include font-size(12px, 18px);
+  }
+
+  &__img {
+    object-position: 50% 50%;
+    object-fit: cover;
+    max-height: 105%;
+    @include breakpoint("tablet-wide") {
+      max-height: unset;
+      max-width: 130%;
+    }
+  }
+
+  // Carousel Dots
+  &__dots {
+
+    &Box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    }
+
+    &Item {
+      width: $dotsSize;
+      height: $dotsSize;
+      border-radius: 50%;
+      background-color: dimgray;
+      margin-right: 20px;
+      cursor: pointer;
+
+      &.is-active {
+        background-color: lightgray;
+      }
+    }
+    
+  }
+
+  // Carousel Arrows, hide on mobile
+  &__arrows {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+
+    @include breakpoint("tablet-wide") {
+      display: block;
+    }
+
+    &--left {
+      left: 10px;
+    }
+
+    &--right {
+      right: 10px;
+    }
+  }
+}
+
+// Component Chevron Left & Right
+.c-chevron {
+  
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-color: dimgray;
+    border-width: 2px 2px 0 0;
+    position: absolute;
+    transform-origin: 50% 50%;
+  }
+  
+  &--left:before { 
+    transform: rotate(-135deg);
+    margin: -15px 0 0 -10px;
+  }
+
+  &--right:before { 
+    transform: rotate(45deg); 
+    margin: -15px 0 0 -20px;
+  }
+}

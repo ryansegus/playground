@@ -1,0 +1,19 @@
+/// Specific Block Modifier
+.l-footer {
+    font-family: $titlesFont;
+    color: whitesmoke;
+    background-color: $secondaryColor;
+    border-top: 1px solid $primaryColor;
+
+    .no-cssgrid & {
+        display: inline-block;
+        /* IE Fix */
+        width: 100%;
+        /* IE Fix */
+    }
+}
+
+.c-footer {
+    @extend %l-containerBox;
+    text-align: center;
+}

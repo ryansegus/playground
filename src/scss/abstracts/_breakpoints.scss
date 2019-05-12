@@ -1,0 +1,59 @@
+/* --------------------------------------------------
+
+   Breakpoint Settings
+   -------------------------------------------------- */
+
+// min or max
+$media-direction:min;  // min / max — default is min (mobile first)
+
+/// Breakpoints map (bp)
+/// A Sass Map for all Breakpoints you need. But keep it simple! Just add Sizes that you need several times.
+/// Here are my basic set. I change the values a bit from project to project
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpointsMap: (
+  'phone-small': 320px,
+  'phone-md': 375px,
+  'phone': 412px,
+  'tablet': 640px,
+  'tablet-wide': 768px,
+  'desktop': 1024px,
+  'desktop-wide': 1280px
+) !default;
+/* --------------------------------------------------
+
+   Breakpoint Mixin
+   -------------------------------------------------- */
+
+/*
+* A mixin to handle breakpoints
+* Link: https://davidhellmann.com/blog/development/sass-breakpoint-mixin
+* You can also simply enter a value instead of 'phone', 'tablet-small', 'tablet'...
+* That makes sense if you need a special breakpoint. You do not have to pack that into the Sass Map.
+* Usage:  @include breakpoint('key') {
+* $breakpoint: the size you need.
+* $direction: $media-direction = what you have set in the settings.
+*/
+
+// TODO: handle orientation and retina
+@mixin breakpoint($breakpoint,$direction: $media-direction) {
+
+  // It will check if the value is present in the Sass Map
+  @if map-has-key($breakpointsMap, $breakpoint) {
+
+    // Ausgabe // Output
+    @media (#{$direction}-width: #{map-get($breakpointsMap, $breakpoint)}) {
+      @content;
+    }
+  }
+
+    // If you have entered a value above, check here if you have attached a unit. If not, px is used.
+  @else if unitless($breakpoint) {
+    $breakpoint: $breakpoint + 0px;
+
+    // Ausgabe // Output
+    @media (#{$direction}-width: $breakpoint) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.c-form {
+    margin-bottom: 1em;
+
+    &__label {
+        margin-bottom: 1em;
+
+        &--isHidden {
+            display: none;
+        }
+    }
+
+    &__fields {
+        label {
+            margin-bottom: 1em;
+        }
+    }
+
+    label {
+        margin-bottom: 1em;
+    }
+
+    &__span {
+        color: $primaryColor;
+    }
+
+    &__response {
+        text-align: center;
+
+        &--success {
+            color: color(contextual, success);
+        }
+
+        &--danger {
+            color: color(contextual, danger);
+        }
+    }
+}
+
+.c-input {
+    @include font-size(20px, 24px);
+    background: transparent;
+    color: $primaryColor;
+    font-family: $titlesFont;
+    letter-spacing: 1px;
+    outline: none;
+    // box-shadow: $ruggedLineBoxShadow;
+    // border-radius: $ruggedLineBorderRadius;
+    border: solid 2px $primaryColor;
+    transition: all 0.3s ease;
+    padding: 0.5em;
+    margin: 0 0 1em 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    &::placeholder {
+        color: $primaryColor;
+    }
+
+    &--isVisible {
+        flex: 1 0 auto;
+        padding: 0.6em 2em;
+        margin: auto 1em;
+        opacity: 1;
+    }
+
+    &--isInvalid {
+        /*ADD IF NEEDED , &:invalid*/
+        border-color: color(contextual, danger);
+    }
+}
+
+.form-elements-fade-enter-active,
+.form-elements-fade-leave-active {
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.form-elements-fade-enter,
+.form-elements-fade-leave-to {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.c-contactWelcome {
+    &__link {
+        color: whitesmoke;
+
+        &:visited,
+        &:active {
+            color: whitesmoke;
+        }
+
+        &:hover {
+            color: $primaryColor;
+        }
+    }
+}
+
+.h-hidden-mobile {
+    display: none;
+
+    @include breakpoint("phone-md") {
+        display: initial;
+    }
+}
+
+.c-errorMsg {
+    @include font-size(20px, 24px);
+    display: block;
+    margin-bottom: 1em;
+    color: color(contextual, danger);
+}
