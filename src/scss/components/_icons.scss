@@ -1,0 +1,28 @@
+$softwaresMap: "Illustrator",
+"PhotoShop",
+"InDesign";
+
+.c-softwares {
+    margin: $gridGap 0;
+
+    &__svg {
+        max-width: 30px;
+        margin-right: $gridGap;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        @each $key in $softwaresMap {
+            @if (map-has-key($brandColors, $key)) {
+                &--#{$key} {
+                    fill: map-get($brandColors, $key);
+                }
+            }
+        }
+
+        @include breakpoint("tablet") {
+            max-width: 45px;
+        }
+    }
+}

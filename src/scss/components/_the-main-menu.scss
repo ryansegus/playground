@@ -1,0 +1,90 @@
+// Menu Layout
+.l-mainMenu {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    color: white;
+    background-color: transparent;
+    height: $headerHeight;
+    transition: background-color 300ms;
+    z-index: 5;
+
+    &.is-fixed {
+        background-color: black;
+    }
+
+    &__box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: calc(100% - #{$bp});
+        margin: auto;
+        max-width: $max-width;
+    }
+}
+
+// Brand Logo
+.c-brandLogo {
+    width: 140px;
+    height: auto;
+}
+
+// Menu Links
+.c-mainMenu {
+    display: flex;
+    color: white;
+    margin: 0;
+    padding: 0;
+
+    &__toggle {
+        position: absolute;
+        top: $headerHeight/2;
+        transform: translateY(-50%);
+        right: 20px;
+        color: white;
+        z-index: 2;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        list-style: none;
+        margin: 0;
+        background-color: transparent;
+        transition: background-color 1s;
+
+        @include breakpoint(767, "max") {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        &.is-desktop {
+            position: relative;
+            flex-direction: row;
+        }
+
+        &.is-open {
+            background-color: black;
+        }
+
+    }
+
+    &__item {
+        @include font-size(12px, 14px);
+
+        @include breakpoint("tablet-wide") {
+            margin-right: 40px;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

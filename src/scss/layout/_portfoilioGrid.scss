@@ -1,0 +1,143 @@
+$projectsMap: "magma", "milano", "InDesign";
+%galleryMaxHeight {
+  max-height: 230px;
+  @include breakpoint("tablet") {
+    max-height: 200px;
+  }
+  @include breakpoint("desktop") {
+    max-height: 350px;
+  }
+}
+.l-portfolioGrid {
+  .v-lazy-image {
+    filter: blur(10px) grayscale(0);
+  }
+  .v-lazy-image-loaded {
+    filter: blur(0) grayscale(0);
+    transform: scale(1) rotate(0);
+  }
+  @include breakpoint("phone") {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  @supports (display: grid) {
+    @include breakpoint("phone") {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1px;
+      padding: 0;
+    }
+  }
+}
+
+.c-project {
+  $self: &;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  width: 50%;
+  @supports (display: grid) {
+    width: 100%;
+  }
+  &__imgBox {
+    @extend %galleryMaxHeight;
+    position: relative;
+    overflow: hidden;
+    max-height: var(--gallery-height);
+    cursor: pointer;
+    transition: transform 300ms, filter 0.7s, opacity 300ms, height 300ms;
+
+    &#{ $self }__imgBox--compatObjectFit {
+      background-size: cover;
+      background-position: center center;
+
+      #{ $self }__image {
+        // hide image if object fit is not supported - opacity to 0 for the link area
+        opacity: 0;
+      }
+    }
+  }
+  &__image {
+    @extend %galleryMaxHeight;
+    width: 100%;
+    max-height: var(--gallery-height);
+    object-position: 50% 50%;
+    object-fit: cover;
+    opacity: 1;
+    transition: transform 300ms, filter 0.7s, opacity 300ms, height 300ms;
+  }
+  &__captionBox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: $gridGap * 2;
+    box-sizing: border-box;
+    cursor: pointer;
+    &Title {
+      position: absolute;
+      z-index: 2;
+      bottom: $gridGap * 2;
+      opacity: 0;
+      transition: transform 300ms, filter 0.7s, opacity 300ms;
+      transform: translate(100%, 0%);
+      width: calc(100% - 40px);
+    }
+  }
+  &__captionBoxBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: $primaryColor;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    transition: transform 300ms, filter 0.7s, opacity 300ms;
+    transform: translate(0%, 130%) skewY(20deg);
+    /* Loop for background colors */
+    @each $key in $projectsMap {
+      @if (map-has-key($brandColors, $key)) {
+        &--#{$key} {
+          background-color: map-get($brandColors, $key);
+        }
+      }
+    }
+  }
+  &__title {
+    @include ellipsisText();
+    text-transform: capitalize;
+    user-select: none;
+    margin-bottom: 0;
+  }
+  &__link {
+    transform: translateY(-5px);
+    color: whitesmoke;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    transition: color 300ms ease;
+    &:hover {
+      color: $secondaryColor;
+      text-decoration: underline;
+    }
+    &:active {
+      color: whitesmoke;
+    }
+  }
+  /* Animated Color Bg */
+  &:hover #{$self}__captionBoxBg {
+    transform: translate(0, 0) skewY(0deg);
+  }
+  /* Animated Text */
+  &:hover #{$self}__captionBoxTitle {
+    opacity: 1;
+    transform: translate(0, 0) skewY(0deg);
+    transition-delay: 150ms;
+  }
+  /* Animated Project Image */
+  &:hover #{$self}__image {
+    transform: scale(1.3) rotate(6deg);
+    filter: blur(0) grayscale(0);
+  }
+}

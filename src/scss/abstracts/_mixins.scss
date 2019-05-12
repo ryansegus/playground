@@ -1,0 +1,261 @@
+$brandColors:(map-get($palettes, brand));
+
+// -----------------------------------------------------------------------------
+// This section contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+/**
+ * Clear inner floats
+ */
+/*.clearfix::after{
+  clear:both;
+  content:'';
+  display:table;
+}*/
+
+/**
+ * Main content containers
+ * 1. Make the container full-width with a maximum width
+ * 2. Center it in the viewport
+ * 3. Leave some space on the edges, especially valuable on small screens
+ */
+/*%l-containerBox{
+  max-width:$max-width; !* 1 *!
+  margin-left:auto; !* 2 *!
+  margin-right:auto; !* 2 *!
+  padding-left:$gridGap; !* 3 *!
+  padding-right:$gridGap; !* 3 *!
+}*/
+
+/**
+ * Hide text while making it readable for screen readers
+ * 1. Needed in WebKit-based browsers because of an implementation bug;
+ *    See: https://code.google.com/p/chromium/issues/detail?id=457146
+ */
+/*.hide-text{
+  overflow:hidden;
+  padding:0; !* 1 *!
+  text-indent:101%;
+  white-space:nowrap;
+}*/
+
+/**
+ * Hide element while making it readable for screen readers
+ * Shamelessly borrowed from HTML5Boilerplate:
+ * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
+ */
+/*.visually-hidden{
+  border:0;
+  clip:rect(0 0 0 0);
+  height:1px;
+  margin:-1px;
+  overflow:hidden;
+  padding:0;
+  position:absolute;
+  width:1px;
+}*/
+
+/**
+ * Hide element ...
+ * Shamelessly b...:
+ * https://github.com/...19-L133
+ */
+/*.h-align-self-center{
+  align-self:center;
+}*/
+
+
+// TODO: OMD ORGANIZE THIS FILE
+
+@mixin centering-the-unknown($horizontal: true, $vertical: true, $translateX: -50%, $translateY: -50%){
+  position:absolute;
+  @if ($horizontal and $vertical){
+    top:50%;
+    left:50%;
+    transform:translate($translateX, $translateY);
+  } @else if ($horizontal){
+    left:50%;
+    transform:translate($translateX, 0);
+  } @else if ($vertical){
+    top:50%;
+    transform:translate(0, $translateY);
+  }
+}
+
+@mixin absolute-center($width:30px,$height:30px){
+  /* height: must be declared */
+  width:$width;
+  height:$height;
+  margin:auto;
+  position:absolute;
+  top:0; left:0; bottom:0; right:0;
+}
+
+@keyframes bounce{
+  0%, 20%, 50%, 80%, 100%{
+    transform:translateY(0) rotate(135deg);
+  }
+  40%{
+    transform:translateY(-30px) rotate(135deg);
+  }
+  60%{
+    transform:translateY(-15px) rotate(135deg);
+  }
+}
+@keyframes bouncePrev{
+  0%, 20%, 50%, 80%, 100%{
+    transform:translateX(0) rotate(135deg);
+  }
+  40%{
+    transform:translateX(-30px) rotate(135deg);
+  }
+  60%{
+    transform:translateX(-15px) rotate(135deg);
+  }
+}
+@keyframes bounceNext{
+  0%, 20%, 50%, 80%, 100%{
+    transform:translateX(0) rotate(135deg);
+  }
+  40%{
+    transform:translateX(30px) rotate(135deg);
+  }
+  60%{
+    transform:translateX(15px) rotate(135deg);
+  }
+}
+
+@mixin cover-background($bg-color, $img-uri, $background-top:"center", $background-left:"center", $background-attachment:"fixed"){
+  background:$bg-color url($img-uri) no-repeat unquote($background-top) unquote($background-left) unquote($background-attachment);
+  background-size:cover;
+}
+
+/*
+* Better function for color palettes using Sass maps
+* Link: http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+* Usage: color: palettes(brand,tan);
+*/
+/*@function palette($palette, $tone: 'base') {
+    @return map-get( map-get($palettes, $palette), $tone );
+}*/
+// retrieve color from $colors map ie. `color(base, primary)`
+@function color($color-name, $color-variant:null){
+  // color variant is optional
+  @if ($color-variant != null){
+    // map inception
+    @return map-get(map-get($palettes, $color-name), $color-variant);
+  } @else{
+    @return map-get($palettes, $color-name);
+  }
+}
+
+@mixin titles () {
+  font-family:$titlesFont;
+  font-weight:400;
+}
+
+%h-displayFlex{
+  display:flex;
+}
+
+%h-resetList{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+%h-img__fluid {
+  width:100%;
+  height:auto;
+}
+
+%h-align-self-center{
+  align-self:center;
+}
+
+%l-flexBox{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+  &__flexibleCol{
+    flex:1;
+  }
+  &__unflexibleCol{
+    flex:0;
+  }
+  /// Global Block Modifiers
+  &--spaceBetween{ justify-content:space-between; }
+  &--verticalFlow{
+    flex-flow:column;
+  }
+}
+
+/**
+ * Main content containers
+ * 1. Make the container full-width with a maximum width
+ * 2. Center it in the viewport
+ * 3. Leave some space on the edges, especially valuable on small screens
+ */
+%l-containerBox{
+  max-width:$max-width; /* 1 */
+  margin-left:auto; /* 2 */
+  margin-right:auto; /* 2 */
+  padding-left:$gridGap; /* 3 */
+  padding-right:$gridGap; /* 3 */
+}
+
+@mixin containerBox ($max-width:$max-width,$padding:$gridGap) {
+  max-width:$max-width; /* 1 */
+  margin-left:auto; /* 2 */
+  margin-right:auto; /* 2 */
+  padding-left:$padding; /* 3 */
+  padding-right:$padding; /* 3 */
+}
+
+/**
+ * Mixin to create ellipsisText
+ */
+
+@mixin ellipsisText () {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//  strip units helper function
+@function num($input){
+  @return $input/($input * 0 + 1);
+}
+
+// ==============================
+// Font size mixin
+// ==============================
+
+//  default font scale bounding
+$font-lock-min:400px !default;
+$font-lock-max:1000px !default;
+
+//  font-size
+@mixin font-size(
+  $min,                         // font-size
+  $max: null,                   // optional maximum font size
+  $lock-min: $font-lock-min,  // optional minimum viewport width
+  $lock-max: $font-lock-max   // optional maximum viewport width
+){
+  &{ font-size:$min; }
+  @if $max{
+    @media (min-width:$lock-min) and (max-width:$lock-max){
+      &{
+        font-size:calc(
+          #{$min} +
+          #{num($max) - num($min)} *
+          (100vw - #{$lock-min}) /
+          #{num($lock-max) - num($lock-min)}
+        );
+      }
+    }
+    @media (min-width:$lock-max){
+      &{ font-size:$max; }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.c-button {
+  @include font-size(20px, 24px);
+  background: transparent;
+  padding: 0.6em 1em;
+  margin: auto;
+  color: $primaryColor;
+  font-family: $titlesFont;
+  letter-spacing: 1px;
+  outline: none;
+  // box-shadow: $ruggedLineBoxShadow;
+  // border-radius: $ruggedLineBorderRadius;
+  border: solid 2px $primaryColor;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.3);
+  }
+  &--reset {
+    color: dimgray;
+    border-color: dimgray;
+  }
+  @include breakpoint("tablet") {
+    padding: 0.6em 2em;
+  }
+}
